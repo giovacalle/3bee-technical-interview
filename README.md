@@ -22,7 +22,6 @@ export default function Home() {
     // if winner open modal to show who is the winner
     // if no winner but moves available keep going
     // if no winner and no move is available show modal
-    // post the Final Board state tu a fake API fake.api.3bee/board
   };
 
   return (
