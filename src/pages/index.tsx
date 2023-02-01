@@ -1,3 +1,6 @@
+import GameBoard from "@/components/GameBoard";
+import BoardBlock from "@/components/BoardBlock";
+
 export default function Home() {
   const handleChange = (boardState, currentPlayer) => {
     // check if there are other moves available
@@ -10,10 +13,11 @@ export default function Home() {
   return (
     <>
       <main>
-        <Gameboard onChange={handleChange}>
+        <GameBoard onChange={handleChange}>
           {(i) => <BoardBlock index={i} />}
-        </Gameboard>
+        </GameBoard>
       </main>
     </>
   );
 }
+
