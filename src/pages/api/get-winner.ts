@@ -1,3 +1,4 @@
+import { checkWinner } from "@/utils/boardGame";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -5,5 +6,18 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   // If no winner return 404
   // IF winner return 200 body {winner: "X"}
 
-  res.status(200).json({ name: "John Doe" });
+  const { board, currentPlayer } = req.body;
+
+  if (!board || !currentPlayer) {
+    return res.status(404).json({ message: "No winner" });
+  }
+
+  const winner = checkWinner(board, currentPlayer);
+
+  if (!winner) {
+    return res.status(404).json({ message: "No winner" });
+  }
+
+  res.status(200).json({ winner });
 }
+

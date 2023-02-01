@@ -20,25 +20,39 @@ export const BoardContextProvider = ({
   const [winner, setWinner] = useState(DEFAULT_BOARD_GAME.winner);
   const [movesCount, setMovesCount] = useState(0);
 
+  // click on block
   const move = (x: number, y: number) => {
     const boardTmp = board.map((row) => row.slice()); // shallow copy
 
-    // check if cell is empty
-    if (boardTmp[x][y] === "") {
-      setBoard((board) => {
-        boardTmp[x][y] = player;
-        return boardTmp;
-      });
-    }
+    if (boardTmp[x][y] !== "") return; // if block is not empty
+
+    setMovesCount((prev) => prev + 1);
+
+    setBoard(() => {
+      boardTmp[x][y] = player;
+      return boardTmp;
+    });
+  };
+
+  // clean board
+  const resetBoard = () => {
+    setBoard(DEFAULT_BOARD_GAME.board);
+    setPlayer(DEFAULT_BOARD_GAME.player);
+    setWinner(DEFAULT_BOARD_GAME.winner);
+    setMovesCount(0);
   };
 
   return (
     <BoardContext.Provider
       value={{
         player,
+        setPlayer,
         winner,
+        setWinner,
         board,
-        move
+        move,
+        movesCount,
+        resetBoard
       }}
     >
       {children}

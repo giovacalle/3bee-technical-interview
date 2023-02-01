@@ -1,6 +1,7 @@
 import { BOARD_SIZE } from "@/data/boardGame";
 import { useBoard } from "@/stores/BoardContext";
-import { ReactNode } from "react";
+import { indexToCoordinates } from "@/utils/boardGame";
+import { ReactNode, useCallback } from "react";
 
 const GameBoard = ({
   onChange,
@@ -9,16 +10,25 @@ const GameBoard = ({
   onChange: (board: any, player: any) => void;
   children: (i: number) => ReactNode;
 }) => {
-  const clickBlock = (index: number) => {
+  const { board, player, move, resetBoard } = useBoard();
+
+  const clickBlockHandler = (index: number) => {
     console.log(index);
-    // call onChange
+    const { x, y } = indexToCoordinates(index);
+
+    move(x, y);
+
+    onChange(board, player);
   };
 
   return (
     <div className="w-full h-[50vh] mt-[150px] px-[40px] flex flex-col gap-5 items-center">
       <div className="w-full flex flex-row items-center justify-between">
         <h1>Current player: X</h1>
-        <button className="py-2 px-6 rounded-lg bg-[#64758b] text-main text-xl">
+        <button
+          className="py-2 px-6 rounded-lg bg-[#64758b] text-main text-xl"
+          onClick={resetBoard}
+        >
           Reset
         </button>
       </div>
@@ -36,8 +46,8 @@ const GameBoard = ({
         ].map((i) => (
           <li
             key={"board-block-" + i}
-            className="w-full h-full flex items-center justify-center bg-boardBlock"
-            onClick={() => clickBlock(i)}
+            className="w-full h-full flex items-center justify-center bg-boardBlock cursor-pointer"
+            onClick={() => clickBlockHandler(i)}
           >
             {children(i)}
           </li>
