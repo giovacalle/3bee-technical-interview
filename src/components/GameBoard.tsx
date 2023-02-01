@@ -1,7 +1,7 @@
 import { BOARD_SIZE } from "@/data/boardGame";
 import { useBoard } from "@/stores/BoardContext";
 import { indexToCoordinates } from "@/utils/boardGame";
-import { ReactNode, useCallback } from "react";
+import { ReactNode } from "react";
 
 const GameBoard = ({
   onChange,
@@ -13,8 +13,9 @@ const GameBoard = ({
   const { board, player, move, resetBoard } = useBoard();
 
   const clickBlockHandler = (index: number) => {
-    console.log(index);
     const { x, y } = indexToCoordinates(index);
+
+    if (board[x][y] !== "") return;
 
     move(x, y);
 
@@ -24,7 +25,7 @@ const GameBoard = ({
   return (
     <div className="w-full h-[50vh] mt-[150px] px-[40px] flex flex-col gap-5 items-center">
       <div className="w-full flex flex-row items-center justify-between">
-        <h1>Current player: X</h1>
+        <h1>Current player: {player}</h1>
         <button
           className="py-2 px-6 rounded-lg bg-[#64758b] text-main text-xl"
           onClick={resetBoard}

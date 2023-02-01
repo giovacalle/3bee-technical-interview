@@ -17,7 +17,6 @@ export const BoardContextProvider = ({
 }) => {
   const [board, setBoard] = useState(DEFAULT_BOARD_GAME.board);
   const [player, setPlayer] = useState(DEFAULT_BOARD_GAME.player);
-  const [winner, setWinner] = useState(DEFAULT_BOARD_GAME.winner);
   const [movesCount, setMovesCount] = useState(0);
 
   // click on block
@@ -38,7 +37,6 @@ export const BoardContextProvider = ({
   const resetBoard = () => {
     setBoard(DEFAULT_BOARD_GAME.board);
     setPlayer(DEFAULT_BOARD_GAME.player);
-    setWinner(DEFAULT_BOARD_GAME.winner);
     setMovesCount(0);
   };
 
@@ -47,8 +45,6 @@ export const BoardContextProvider = ({
       value={{
         player,
         setPlayer,
-        winner,
-        setWinner,
         board,
         move,
         movesCount,

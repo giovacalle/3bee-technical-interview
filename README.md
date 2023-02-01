@@ -46,8 +46,14 @@ export default function Home() {
 
 - Explain how to move from SINGLE console player to a multiplayer version (remote)
 
+  In order to create multiplayer version we could use websockets to communicate between players
+  we could use a library like socket.io to handle the communication
+  and then set the game restriction to only 2 players per game
+  so when a player joins a game we could create a room for them (with shareable link)
+
 - Use Tailwind
 
 - Use Typescript
 
-- After deploy 
+- After deploy
+
