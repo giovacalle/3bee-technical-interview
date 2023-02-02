@@ -22,7 +22,6 @@ export default function Home() {
       player: IBoardGamePlayer;
     }) => {
       return fetch(`${API_URL}/get-winner`, {
-        mode: "no-cors",
         method: "POST",
         headers: {
           "Content-Type": "application/json"
